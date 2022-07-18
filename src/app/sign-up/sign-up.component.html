@@ -1,0 +1,41 @@
+<div class="row my-3">
+    <div class="col-12 col-md-8 offset-md-2 bg-dark rounded text-white p-3">
+        <h5 class="display-5 text-muted">Exercice Formulaire A</h5>
+        <hr>
+        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+            <div class="mb-3 row">
+                <div class="col-2">
+                    <label for="email" class="form-label">Email :</label>
+                </div>
+                <div class="col">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="email@example.com" ngModel required #usernameInput="ngModel">
+                </div>
+                <span *ngIf="usernameInput.control.status == 'INVALID' && usernameInput.control.touched" class="col-12 text-danger text-end mt-2">L'Email est invalide !</span>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-2">
+                    <label for="password" class="form-label">Mot de passe :</label>
+                </div>
+                <div class="col">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="AzErTyUiOp" ngModel required #passwordInput="ngModel">
+                </div>
+                <span *ngIf="passwordInput.control.status == 'INVALID' && passwordInput.control.touched" class="col-12 text-danger text-end mt-2">Le Mot de passe est invalide !</span>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-2">
+                    <label for="registration-type" class="form-label">Type d'abonnement :</label>
+                </div>
+                <div class="col">
+                    <select name="registration-type" id="registration-type" class="form-select" [ngModel]="defaultSubscription" required #typeSelect="ngModel">
+                        <option *ngFor="let subscription of subscriptionTypes" [value]="subscription"> {{ subscription }} </option>
+                    </select>
+                </div>
+                <span *ngIf="typeSelect.control.status == 'INVALID' && typeSelect.control.touched" class="col-12 text-danger text-end mt-2">Le type d'Abonnement est invalide !</span>
+            </div>
+            <hr>
+            <div class="text-end">
+                <button class="btn btn-outline-light" type="submit" [disabled]="form.form.status === 'INVALID' || !form.form.touched"><i class="bi bi-send"></i> Envoyer</button>
+            </div>
+        </form>
+    </div>
+</div>
